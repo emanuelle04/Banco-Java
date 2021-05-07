@@ -94,12 +94,23 @@ public class Conta implements OperacoesContasBancarias {
     }
 
     @Override
-    public boolean transferirParaMesmoBanco(String tipoDaConta, int numeroDaContaDestino, int agenciaDaConta, double valorTrasnferencia) {
-        return false;
+    public boolean transferirParaMesmoBanco(String tipoDaConta, double valorTransferencia, Conta contaDestino) {
+        if(valorTransferencia <= saldo && tipoDaConta != "Salario"){this.sacar(valorTransferencia);contaDestino.depositar(valorTransferencia);
+            LocalTime horaTransacaoNow = LocalTime.now();
+            LocalDate dataTransacao = LocalDate.now();
+            horaTransacao.add( "Data da transação: " + dataTransacao.toString() + "\nHora da transação:"+ horaTransacaoNow.toString() + "\nOperação: Transferencia para o mesmo Banco.");
+            saldoTransacao.add(saldo);
+            return true; }
+        else{System.out.println("Saldo Indisponível.\n"); return false;}
+
     }
 
 
     public String getSaldo(){
         return "Seu saldo é: " + saldo;
+    }
+
+    public String getProprietario() {
+        return proprietario;
     }
 }

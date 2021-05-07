@@ -3,6 +3,6 @@ public interface OperacoesContasBancarias {
     boolean sacar(double valor);
     void visualizarExtrato();
     void tranferirDinheiroOutroBanco(String bancoDestino, int numeroDaContaDestino, double valorTrasnferencia);
-    boolean transferirParaMesmoBanco(String tipoDaConta, int numeroDaContaDestino, int agenciaDaConta, double valorTrasnferencia);
+    boolean transferirParaMesmoBanco(String tipoDaConta, double valorTransferencia, Conta contaDestino);
 
 }

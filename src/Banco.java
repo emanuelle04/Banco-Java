@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+
 public class Banco {
-    ContaCorrente[] contasCorrentes = new ContaCorrente[10];
-    ContaPoupanca[] contasPoupancas = new ContaPoupanca[10];
-    CarteiraDigital[] carteiraDigitals = new CarteiraDigital[10];
+    ArrayList<ContaCorrente> contasCorrentes = new ArrayList<ContaCorrente>();
+    ArrayList<ContaPoupanca> contasPoupancas = new ArrayList<ContaPoupanca>();
+    ArrayList<ContaSalario> contasSalarios = new ArrayList<ContaSalario>();
+    ArrayList<CarteiraDigital>  carteiraDigitais = new ArrayList<CarteiraDigital>();
     public static String[] listaBancos = {"Azul", "Pague Facil", "Banco Brasileiro"};
     static int contadorCarteirasDigitais = 0;
     static int contadorContasCorrentes = 0;
@@ -9,7 +12,7 @@ public class Banco {
 
 
     public void adicionarContaCorrente(ContaCorrente conta) {
-        this.contasCorrentes[contadorContasCorrentes] = conta;
+        this.contasCorrentes.add(conta);
         String textoConclusaoAdicaoDaContaCorrente = "Nova Conta Corrente adicionada.\nNúmero da Conta Corrente: " + contadorContasCorrentes + "\nProprietario:" + conta.proprietario + "\nAgencia:" + conta.agencia +"\n";
         System.out.println(textoConclusaoAdicaoDaContaCorrente);
         contadorContasCorrentes++;
@@ -17,13 +20,13 @@ public class Banco {
     }
 
     public void adicionarContaPoupanca(ContaPoupanca conta) {
-        this.contasPoupancas[contadorContasPoupancas] = conta;
+        this.contasPoupancas.add(conta);
         String textoConclusaoAdicaoDaContaPoupanca = "Nova Conta Poupança adicionada.\nNúmero da Conta Poupanca: " + contadorContasCorrentes + "\nProprietario:" + conta.proprietario + "\nAgencia:" + conta.agencia+"\n";
         System.out.println(textoConclusaoAdicaoDaContaPoupanca);
         contadorContasPoupancas++;
     }
     public void adicionarCarteiraDigital(CarteiraDigital conta) {
-        this.carteiraDigitals[contadorCarteirasDigitais] = conta;
+        this.carteiraDigitais.add(conta);
         String textoConclusaoAdicaoDeCarteiraDigital = "Nova Carteira Digital adicionada.\nId da Carteira Digital: " + contadorContasCorrentes + "\nProprietario:" + conta.proprietario + "\n";
         System.out.println(textoConclusaoAdicaoDeCarteiraDigital);
         contadorCarteirasDigitais++;
@@ -42,16 +45,24 @@ public class Banco {
     public Conta procurarUsuario(String tipoDeConta, int agencia, int numeroDaConta) {
         Conta contaPesquisada = new Conta();
         if (tipoDeConta == "Corrente") {
-            for (int i = 0; i < contasCorrentes.length; i++) {
-                if (this.contasCorrentes[i].agencia == agencia && this.contasCorrentes[i].numeroConta == numeroDaConta) {
-                    contaPesquisada = this.contasCorrentes[i];
+            for (int i = 0; i < contasCorrentes.size(); i++) {
+                if (this.contasCorrentes.get(i).agencia == agencia && this.contasCorrentes.get(i).numeroConta == numeroDaConta) {
+                    contaPesquisada = this.contasCorrentes.get(i);
                     break;
                 }
             }
-        } else {
-            for (int i = 0; i < contasPoupancas.length; i++) {
-                if (this.contasPoupancas[i].agencia == agencia && this.contasPoupancas[i].numeroConta == numeroDaConta) {
-                    contaPesquisada = this.contasPoupancas[i];
+        } else if (tipoDeConta == "Salario") {
+            for (int i = 0; i < contasSalarios.size(); i++) {
+                if (this.contasSalarios.get(i).agencia == agencia && this.contasSalarios.get(i).numeroConta == numeroDaConta) {
+                    contaPesquisada = this.contasSalarios.get(i);
+                    break;
+                }
+            }
+
+        } else if (tipoDeConta == "Poupanca"){
+            for (int i = 0; i < contasPoupancas.size(); i++) {
+                if (this.contasPoupancas.get(i).agencia == agencia && this.contasPoupancas.get(i).numeroConta == numeroDaConta) {
+                    contaPesquisada = this.contasPoupancas.get(i);
                     break;
                 }
             }
